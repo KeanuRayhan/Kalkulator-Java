@@ -3,48 +3,75 @@ package com.javakeanu;
 public class Computation {
 
     public static String hitung(String input1, String input2, String operator) {
-        int a, b;
-
-        // Validasi angka
         try {
-            a = Integer.parseInt(input1);
-            b = Integer.parseInt(input2);
-        } catch (NumberFormatException e) {
-            return "Error: Input harus berupa angka.";
-        }
+            int a = parseInput(input1);
+            int b = parseInput(input2);
 
-        // Validasi rentang
-        if (a < -32768 || a > 32767 || b < -32768 || b > 32767) {
-            return "Error: Nilai harus berada dalam rentang -32,768 hingga 32,767.";
-        }
+            validateRange(a);
+            validateRange(b);
 
-        // Validasi operator
-        if (!operator.matches("[+\\-*/]")) {
-            return "Error: Operator tidak valid. Gunakan +, -, * atau /.";
-        }
+            validateOperator(operator);
+            validateDivideByZero(operator, b);
 
-        // Validasi pembagian nol
-        if (operator.equals("/") && b == 0) {
-            return "Error: Tidak bisa membagi dengan nol.";
-        }
+            int hasil = compute(a, b, operator);
+            return "Hasil: " + hasil;
 
-        // Perhitungan
-        int hasil = 0;
-        switch (operator) {
-            case "+":
-                hasil = Calculator.tambah(a, b);
-                break;
-            case "-":
-                hasil = Calculator.kurang(a, b);
-                break;
-            case "*":
-                hasil = Calculator.kali(a, b);
-                break;
-            case "/":
-                hasil = Calculator.bagi(a, b);
-                break;
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            return e.getMessage();
         }
-
-        return "Hasil: " + hasil;
     }
+
+    // Modul untuk melakukan pengecekan input yang dimasukkan berupa angka
+    private static int parseInput(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Error: Input tidak boleh null.");
+        }
+        if (input.trim().isEmpty()) {
+            throw new IllegalArgumentException("Error: Input tidak boleh kosong.");
+        }
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Error: Input harus berupa angka.");
+        }
+    }
+
+    // Modul untuk validasi rentang angka input
+    private static void validateRange(int value) {
+        if (value < -32768) {
+            throw new IllegalArgumentException("Error: Nilai terlalu kecil dari batas minimum.");
+        }
+        if (value > 32767) {
+            throw new IllegalArgumentException("Error: Nilai melebihi batas maksimum.");
+        }
+    }
+
+    // Modul untuk validasi operator yang dimasukkan
+    private static void validateOperator(String operator) {
+        if (operator == null || operator.trim().isEmpty()) {
+            throw new IllegalArgumentException("Error: Operator tidak boleh kosong.");
+        }
+        if (!operator.equals("+") && !operator.equals("-") && !operator.equals("*") && !operator.equals("/")) {
+            throw new IllegalArgumentException("Error: Operator tidak valid.");
+        }
+    }
+
+    // Modul untuk validasi khusus Pembagian dengan angka 0
+    private static void validateDivideByZero(String operator, int b) {
+        if (operator.equals("/") && b == 0) {
+            throw new IllegalArgumentException("Error: Tidak bisa membagi dengan nol.");
+        }
+    }
+
+    // Modul menghitung sesuai operasi
+    private static int compute(int a, int b, String operator) {
+        switch (operator) {
+            case "+" -> { return Calculator.tambah(a, b); }
+            case "-" -> { return Calculator.kurang(a, b); }
+            case "*" -> { return Calculator.kali(a, b); }
+            case "/" -> { return Calculator.bagi(a, b); }
+            default -> throw new IllegalStateException("Error: Operasi tidak dikenali.");
+        }
+    }
+
 }

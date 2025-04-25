@@ -8,6 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("=== Kalkulator ===");
+
         System.out.print("Masukkan angka pertama: ");
         String input1 = scanner.nextLine();
 
