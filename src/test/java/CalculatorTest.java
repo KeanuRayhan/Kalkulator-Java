@@ -15,6 +15,6 @@ public class CalculatorTest {
         int result = Calculator.tambah(a, b);
 
         // Assert (cek hasilnya)
-        assertEquals(8, result, "5 + 3 seharusnya 8");
+        assertEquals(10, result, "5 + 3 seharusnya 8");
     }
 }
