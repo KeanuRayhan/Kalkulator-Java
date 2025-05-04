@@ -22,11 +22,12 @@ public class Computation {
     }
 
     // Modul untuk melakukan pengecekan input yang dimasukkan berupa angka
-    private static int parseInput(String input) {
+    public static int parseInput(String input) {
         if (input == null) {
             throw new IllegalArgumentException("Error: Input tidak boleh null.");
         }
-        if (input.trim().isEmpty()) {
+        input = input.trim();
+        if (input.isEmpty()) {
             throw new IllegalArgumentException("Error: Input tidak boleh kosong.");
         }
         try {
@@ -57,7 +58,7 @@ public class Computation {
     }
 
     // Modul untuk validasi khusus Pembagian dengan angka 0
-    private static void validateDivideByZero(String operator, int b) {
+    public static void validateDivideByZero(String operator, int b) {
         if (operator.equals("/") && b == 0) {
             throw new IllegalArgumentException("Error: Tidak bisa membagi dengan nol.");
         }
@@ -73,5 +74,6 @@ public class Computation {
             default -> throw new IllegalStateException("Error: Operasi tidak dikenali.");
         }
     }
+
 
 }
