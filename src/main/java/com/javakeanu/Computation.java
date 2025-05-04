@@ -22,7 +22,7 @@ public class Computation {
     }
 
     // Modul untuk melakukan pengecekan input yang dimasukkan berupa angka
-    private static int parseInput(String input) {
+    public static int parseInput(String input) {
         if (input == null) {
             throw new IllegalArgumentException("Error: Input tidak boleh null.");
         }
@@ -37,7 +37,7 @@ public class Computation {
     }
 
     // Modul untuk validasi rentang angka input
-    private static void validateRange(int value) {
+    public static void validateRange(int value) {
         if (value < -32768) {
             throw new IllegalArgumentException("Error: Nilai terlalu kecil dari batas minimum.");
         }
@@ -47,7 +47,7 @@ public class Computation {
     }
 
     // Modul untuk validasi operator yang dimasukkan
-    private static void validateOperator(String operator) {
+    public static void validateOperator(String operator) {
         if (operator == null || operator.trim().isEmpty()) {
             throw new IllegalArgumentException("Error: Operator tidak boleh kosong.");
         }
@@ -57,14 +57,14 @@ public class Computation {
     }
 
     // Modul untuk validasi khusus Pembagian dengan angka 0
-    private static void validateDivideByZero(String operator, int b) {
+    public static void validateDivideByZero(String operator, int b) {
         if (operator.equals("/") && b == 0) {
             throw new IllegalArgumentException("Error: Tidak bisa membagi dengan nol.");
         }
     }
 
     // Modul menghitung sesuai operasi
-    private static int compute(int a, int b, String operator) {
+    public static int compute(int a, int b, String operator) {
         switch (operator) {
             case "+" -> { return Calculator.tambah(a, b); }
             case "-" -> { return Calculator.kurang(a, b); }
