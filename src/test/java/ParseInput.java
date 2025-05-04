@@ -13,6 +13,7 @@ public class ParseInput {
         assertEquals("Error: Input tidak boleh null.", exception.getMessage());
     }
 
+
     @Test
     void TC2_inputKosong_throwException() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
