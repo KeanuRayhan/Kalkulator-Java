@@ -1,4 +1,4 @@
-package com.javakeanu;
+import com.javakeanu.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
