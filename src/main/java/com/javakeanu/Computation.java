@@ -26,7 +26,8 @@ public class Computation {
         if (input == null) {
             throw new IllegalArgumentException("Error: Input tidak boleh null.");
         }
-        if (input.trim().isEmpty()) {
+        input = input.trim();
+        if (input.isEmpty()) {
             throw new IllegalArgumentException("Error: Input tidak boleh kosong.");
         }
         try {
